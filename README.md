@@ -5,12 +5,17 @@ to run and start the demo project:
 then
 `npm run dev`
 
+Running different version of node? Use Docker without interfering with your current environment!
+_this will run production build of this demo app. Changing the code will not update the UI_
+run `docker compose build` then `docker compose up`
+After testing, remember to run `docker compose down`
+
 This project supports multiple languages with i18n.
 Default language is English in USD:
-[http://localhost:5173](http://localhost:5173)
+[http://localhost:3001](http://localhost:3001)
 
 Use the following URL to access French UI and conversion rate in Euro:
-[http://localhost:5173/?amt=122&lang=fr&cur=EUR](http://localhost:5173/?amt=122&lang=fr&cur=EUR)
+[http://localhost:3001/?lang=fr&cur=EUR](http://localhost:3001/?lang=fr&cur=EUR)
 
 You may also mix and match languages/currency with the params:
 eg: `lang=fr&cur=USD` and `lang=en&cur=EUR`
@@ -36,4 +41,5 @@ Things to improve:
 - Unit test or acceptance test would be nice.
 - aria-label or aria-description for certain elements.
 - Auto copy to clipboard when click or tapped on BTC/ETH allocations.
+- Add suport for docker development env.
 - Lack monitoring tools.
