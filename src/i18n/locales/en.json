@@ -1,0 +1,6 @@
+{
+  "site_header": "Asset allowcation calculator",
+  "investable_assets": "Investable assets",
+  "btc_allocation": "{percentage}% BTC allocation",
+  "eth_allocation": "{percentage}% ETH allocation"
+}

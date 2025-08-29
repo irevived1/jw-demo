@@ -1,0 +1,6 @@
+{
+  "site_header": "Calculateur de répartition d'actifs",
+  "investable_assets": "Actifs investissables",
+  "btc_allocation": "Allocation de {percentage}% de BTC",
+  "eth_allocation": "Allocation ETH de {percentage}%"
+}
