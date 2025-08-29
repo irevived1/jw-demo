@@ -6,9 +6,8 @@ then
 `npm run dev`
 
 Running different version of node? Use Docker without interfering with your current environment!
-_this will run production build of this demo app. Changing the code will not update the UI_
-run `docker compose build` then `docker compose up`
-After testing, remember to run `docker compose down`
+_This will run production build of this demo app. Changing the code will not update the UI_.
+Run `docker compose build` then `docker compose up`. After testing, remember to run `docker compose down`
 
 This project supports multiple languages with i18n.
 Default language is English in USD:
