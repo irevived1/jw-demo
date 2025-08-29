@@ -1,5 +1,5 @@
-import { oldApiData } from '@/utils/oldApiData.js'
-import { ETH, BTC } from '@/utils/constants.js'
+import { mockApiData } from '@/utils/mockApiData.js'
+import { ETH, BTC, supportedCurrencies, supportedCurrenciesArray } from '@/utils/constants.js'
 
 export const stripNonDigits = (string) => ( string || '' ).replace(/\D/g, '' )
 
@@ -19,6 +19,14 @@ export const setQueryParam = (key, value) => {
   }
 }
 
+export const currencyProp = {
+        type: String,
+        default: supportedCurrencies.USD,
+        validator: function (value) {
+          return supportedCurrenciesArray.indexOf(value) !== -1
+        }
+      }
+
 const API_URL = 'https://api.coinbase.com/v2/exchange-rates?currency='
 export const fetchExchangeRates = async (currency) => {
   try {
@@ -28,11 +36,12 @@ export const fetchExchangeRates = async (currency) => {
     console.error('unexpected error', e)
     // WARNING!
     // this is a fallback and is to prevent network issue or coinbase api issue affecting this demo
-    return oldApiData[currency]
+    return mockApiData[currency]
   }
 }
 
 export const fetchAndTrimExchangeData = async (currency) => {
+  // uncomment the next line to see loader
   // await sleep(5000)
   const resp = await fetchExchangeRates(currency)
   return { [BTC]: resp.data.rates[BTC], [ETH]: resp.data.rates[ETH] }

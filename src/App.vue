@@ -1,7 +1,5 @@
 <script setup>
 import AssetCalculator from '@/components/AssetCalculator.vue'
-// import i18n from "@/i18n"
-// console.log(i18n.global.locale.value = 'fr')
 </script>
 
 <template>

@@ -5,7 +5,7 @@
   import {
     AMT, CUR, USD, BTC, ETH, LANG,
     supportedCurrencies
-} from '@/utils/constants.js'
+  } from '@/utils/constants.js'
   import {
     stripNonDigits,
     getQueryParam,
@@ -15,6 +15,10 @@
   } from '@/utils/helper.js'
   import { debounce, isNumber } from 'lodash'
   import { useI18n } from 'vue-i18n'
+  import { loadLocaleMessages } from "@/i18n"
+
+  // uncomment the following line to see config options
+  // import SettingDropDowns from '@/components/SettingDropDowns.vue'
 
   // FEEL FREE TO CHANGE THESE VALUES
   const BTC_ALLOC = 70
@@ -25,24 +29,27 @@
   const rates = ref(null)
 
   const currencyFromQueryParam = getQueryParam(CUR)
-  const currency = supportedCurrencies[currencyFromQueryParam] || USD
+  const currency = ref(supportedCurrencies[currencyFromQueryParam] || USD)
 
   const localeFromQueryParam = getQueryParam(LANG)
 
-  const changeLanguage = (lang) => {
+  const changeLanguage = async (lang) => {
     if (!lang) { return }
-    const { locale } = useI18n()
+    const { locale, setLocaleMessage } = useI18n()
     if (locale.value !== lang) {
+      await loadLocaleMessages(setLocaleMessage, lang)
       locale.value = lang
     }
   }
 
-  changeLanguage(localeFromQueryParam)
-
   const asyncFetchData = async () => {
-    rates.value = await fetchAndTrimExchangeData(currency)
+    rates.value = await fetchAndTrimExchangeData(currency.value)
   }
-  asyncFetchData()
+
+  Promise.all([
+    changeLanguage(localeFromQueryParam),
+    asyncFetchData()
+  ])
 
   function handleChange(event) {
     investableAssetValue.value = Number(stripNonDigits(event.target.value))
@@ -59,6 +66,16 @@
 
 <template>
   <div class="content">
+    <!-- Uncomment component below to see SettingDropDowns -->
+    <!-- <SettingDropDowns -->
+    <!--   :currency="currency" -->
+    <!--   :locale="localeFromQueryParam" -->
+    <!--   :handleCurrencyChange="({target}) => { -->
+    <!--     currency = target.value -->
+    <!--     setQueryParam(CUR, target.value) -->
+    <!--     asyncFetchData() -->
+    <!--   }" -->
+    <!-- /> -->
     <h1>{{ $t("site_header") }}</h1>
     <div class="display-fields">
       <div class="currency-input">

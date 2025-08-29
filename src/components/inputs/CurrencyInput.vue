@@ -1,6 +1,8 @@
 <script setup>
   import LabelInputBase from '@/components/inputs/LabelInputBase.vue'
-  import { supportedCurrencies, supportedCurrenciesArray, BACKSPACE } from '@/utils/constants.js'
+  import { BACKSPACE } from '@/utils/constants.js'
+  import { currencyProp } from '@/utils/helper.js'
+
 
   const props = defineProps(
     {
@@ -22,13 +24,7 @@
       handleChange: {
         type: Function
       },
-      currency: {
-        type: String,
-        default: supportedCurrencies.USD,
-        validator: function (value) {
-          return supportedCurrenciesArray.indexOf(value) !== -1
-        }
-      }
+      currency: currencyProp
     }
   )
 
